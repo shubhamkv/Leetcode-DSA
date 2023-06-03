@@ -62,7 +62,8 @@ public:
         
         vector<bool> prev(sum+1,0), curr(sum+1,0);
         prev[0] = curr[0] = true;
-        prev[arr[0]] = true;
+        if(arr[0]<=sum)
+           prev[arr[0]] = true;
         
         for(int i=1;i<n;i++)
         {
