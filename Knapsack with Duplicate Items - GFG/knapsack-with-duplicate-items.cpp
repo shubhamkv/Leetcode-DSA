@@ -36,27 +36,52 @@ class Solution{
         
         // -----------------------Tabulation DP Solution-------------------------
         
-        vector<vector<int>> dp(N, vector<int> (W+1,0));
+        // vector<vector<int>> dp(N, vector<int> (W+1,0));
+        
+        // for(int weight=0;weight<=W;weight++)
+        // {
+        //     dp[0][weight] = int(weight/wt[0]) * val[0];
+        // }
+        
+        // for(int ind=1;ind<N;ind++)
+        // {
+        //     for(int weight=0;weight<=W;weight++)
+        //     {
+        //         int notTake = 0 + dp[ind-1][weight];
+        //         int take = INT_MIN;
+        //         if(wt[ind]<=weight)
+        //         take = val[ind] + dp[ind][weight-wt[ind]];
+           
+        //         dp[ind][weight] = max(notTake,take);
+        //     }
+        // }
+        
+        // return dp[N-1][W];
+        
+        // --------------------------Space Optimization---------------------------
+        
+        vector<int> prev(W+1,0) , curr(W+1,0);
         
         for(int weight=0;weight<=W;weight++)
         {
-            dp[0][weight] = int(weight/wt[0]) * val[0];
+            prev[weight] = int(weight/wt[0]) * val[0];
         }
         
         for(int ind=1;ind<N;ind++)
         {
             for(int weight=0;weight<=W;weight++)
             {
-                int notTake = 0 + dp[ind-1][weight];
+                int notTake = 0 + prev[weight];
                 int take = INT_MIN;
                 if(wt[ind]<=weight)
-                take = val[ind] + dp[ind][weight-wt[ind]];
+                take = val[ind] + curr[weight-wt[ind]];
            
-                dp[ind][weight] = max(notTake,take);
+                curr[weight] = max(notTake,take);
             }
+            prev = curr;
         }
         
-        return dp[N-1][W];
+        return prev[W];
     }
 };
 
