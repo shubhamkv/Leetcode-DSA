@@ -60,7 +60,32 @@ class Solution{
         
         // --------------------------Space Optimization---------------------------
         
-        vector<int> prev(W+1,0) , curr(W+1,0);
+        // vector<int> prev(W+1,0) , curr(W+1,0);
+        
+        // for(int weight=0;weight<=W;weight++)
+        // {
+        //     prev[weight] = int(weight/wt[0]) * val[0];
+        // }
+        
+        // for(int ind=1;ind<N;ind++)
+        // {
+        //     for(int weight=0;weight<=W;weight++)
+        //     {
+        //         int notTake = 0 + prev[weight];
+        //         int take = INT_MIN;
+        //         if(wt[ind]<=weight)
+        //         take = val[ind] + curr[weight-wt[ind]];
+           
+        //         curr[weight] = max(notTake,take);
+        //     }
+        //     prev = curr;
+        // }
+        
+        // return prev[W];
+        
+        // ---------------------- 1D Array Space Optimization-----------------------
+        
+        vector<int> prev(W+1,0) ;
         
         for(int weight=0;weight<=W;weight++)
         {
@@ -74,11 +99,10 @@ class Solution{
                 int notTake = 0 + prev[weight];
                 int take = INT_MIN;
                 if(wt[ind]<=weight)
-                take = val[ind] + curr[weight-wt[ind]];
+                take = val[ind] + prev[weight-wt[ind]];
            
-                curr[weight] = max(notTake,take);
+                prev[weight] = max(notTake,take);
             }
-            prev = curr;
         }
         
         return prev[W];
