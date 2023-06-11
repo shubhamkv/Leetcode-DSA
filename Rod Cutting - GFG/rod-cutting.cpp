@@ -58,7 +58,30 @@ class Solution{
         
         // ---------------- Space Optimization-------------------------------
         
-        vector<int> prev(n+1,0), curr(n+1,0);
+        // vector<int> prev(n+1,0), curr(n+1,0);
+        
+        // for(int N=0;N<=n;N++)
+        //   prev[N] = N*price[0];
+          
+        // for(int ind=1;ind<n;ind++)
+        // {
+        //     for(int N=0;N<=n;N++)
+        //     {
+        //         int notTake = 0 + prev[N];
+        //         int take = INT_MIN;
+        //         int rodlength = ind+1;
+        //         if(rodlength<=N)
+        //           take = price[ind] + curr[N-rodlength];
+        
+        //         curr[N] = max(take,notTake);
+        //     }
+        //     prev = curr;
+        // }
+        // return prev[n];
+        
+        // --------------------- 1D Array Space Optimization-----------------------
+        
+        vector<int> prev(n+1,0);
         
         for(int N=0;N<=n;N++)
           prev[N] = N*price[0];
@@ -71,11 +94,10 @@ class Solution{
                 int take = INT_MIN;
                 int rodlength = ind+1;
                 if(rodlength<=N)
-                  take = price[ind] + curr[N-rodlength];
+                  take = price[ind] + prev[N-rodlength];
         
-                curr[N] = max(take,notTake);
+                prev[N] = max(take,notTake);
             }
-            prev = curr;
         }
         return prev[n];
     }
