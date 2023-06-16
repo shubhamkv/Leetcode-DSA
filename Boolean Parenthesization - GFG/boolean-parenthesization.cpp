@@ -77,7 +77,7 @@ public:
         {
             for(int j=i+1;j<N;j++)
             {
-                for(int True=0;True<2;True++)
+                for(int isTrue=0;isTrue<2;isTrue++)
                 {
                     int ways = 0;
                     for(int ind=i+1;ind<=j-1;ind=ind+2)
@@ -89,27 +89,27 @@ public:
             
                        if(S[ind]=='&')
                        {
-                         if(True)
+                         if(isTrue)
                            ways = (ways + (lT*rT)%mod)%mod;
                          else
                            ways = (ways + (lF*rT)%mod + (lT*rF)%mod + (lF*rF)%mod)%mod;
                        }
                        else if(S[ind]=='|')
                        {
-                         if(True)
+                         if(isTrue)
                            ways = (ways + (lT*rF)%mod + (lF*rT)%mod + (lT*rT)%mod)%mod;
                          else
                            ways = (ways + (lF*rF)%mod)%mod;
                        }
                        else
                        {
-                         if(True)
+                         if(isTrue)
                            ways = (ways + (lF*rT)%mod + (lT*rF)%mod)%mod;
                          else
                            ways = (ways + (lF*rF)%mod + (lT*rT)%mod)%mod;
                        }
                    }
-                   dp[i][j][True] = ways;
+                   dp[i][j][isTrue] = ways;
                 }
             }
         }
