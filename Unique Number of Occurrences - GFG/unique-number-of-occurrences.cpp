@@ -11,7 +11,7 @@ class Solution
     bool isFrequencyUnique(int n, int arr[])
     {
         unordered_map<int,int> mp1;
-        vector<int> temp;
+        //vector<int> temp;
         set<int> s;
         
         for(int i=0;i<n;i++)
@@ -19,11 +19,11 @@ class Solution
           
         for(auto it:mp1)
         {
-            temp.push_back(it.second);
+            //temp.push_back(it.second);
             s.insert(it.second);
         }
            
-        if(s.size()==temp.size())
+        if(s.size()==mp1.size())
            return true;
         return false;
     }
